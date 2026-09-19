@@ -52,6 +52,8 @@ public class MapGenerator : MonoBehaviour
         Vector3 topLeft = new Vector3(center.x -  halfScale.x, center.y + halfScale.y, center.z - 1);
         Vector3 bottomRight = new Vector3(center.x + halfScale.x, center.y - halfScale.y, center.z - 1);
 
+        int index = 0;
+
         for (int row = 0; row < rows; row++)
         {
             for (int col = 0; col < cols; col++)
@@ -63,6 +65,8 @@ public class MapGenerator : MonoBehaviour
                 
                 Vector3 spawnPos = new Vector3(spawnX, spawnY, topLeft.z);
                 Instantiate(backgroundTile, spawnPos, Quaternion.identity);
+
+                index++;
             }
         }
     }
