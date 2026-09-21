@@ -7913,6 +7913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 849708289}
   - component: {fileID: 849708288}
+  - component: {fileID: 849708290}
   m_Layer: 0
   m_Name: MovePacStudent
   m_TagString: Untagged
@@ -7949,6 +7950,18 @@ Transform:
   - {fileID: 1701171479}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &849708290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849708287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a6058d34472dd478027bed7cf6c11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tweener
 --- !u!1 &1000346004
 GameObject:
   m_ObjectHideFlags: 0
@@ -16768,7 +16781,7 @@ Transform:
   m_GameObject: {fileID: 1701171476}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.75, y: 12.5, z: -13}
+  m_LocalPosition: {x: -17.78, y: 12.52, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
