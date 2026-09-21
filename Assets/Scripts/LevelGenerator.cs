@@ -25,7 +25,38 @@ public class LevelGenerator : MonoBehaviour
     public Tilemap target;
     private Tilemap.TileArray _tiles;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void PlaceTiles(int[,] grid)
+    {
+        int rows = grid.GetLength(0);
+        int cols = grid.GetLength(1);
+
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                int tileID = grid[r, c];
+
+                TileBase tileToPlace = null;
+
+                // Check if the tileID is within bounds of your assigned array
+                if (tileID >= 0)
+                {
+                    tileToPlace = _tiles[0];
+                }
+
+                // Invert the Y coordinate (`rows - 1 - r`) so row 0 (top of array) 
+                // gets placed at the top of the tilemap instead of being flipped upside down.
+                int yPos = rows - 1 - r - Mathf.CeilToInt(rows/2f);
+                int xPos = c - Mathf.CeilToInt(cols/2f);
+                Vector3Int pos = new Vector3Int(xPos, yPos, 0);
+
+                target.SetTile(pos, tileToPlace);
+            }
+        }
+
+        Debug.Log($"LevelGenerator: Placed tiles successfully! Map size: {rows} x {cols}");
+    }
+    
     void Start()
     {
         _tiles = target.GetUsedTiles();
@@ -36,5 +67,32 @@ public class LevelGenerator : MonoBehaviour
         
         int newRows = (originalRows * 2) - 1; // 29
         int newCols = originalCols * 2;       // 28
+        
+        int[,] fullMap = new int[newRows, newCols];
+
+        for (int r = 0; r < originalRows; r++)
+        {
+            for (int c = 0; c < originalCols; c++)
+            {
+                int tileVal = levelMap[r, c];
+
+                // top right
+                fullMap[r, c] = tileVal;
+                fullMap[r, newCols - 1 - c] = tileVal;
+
+                // bottom half
+                if (r < originalRows - 1)
+                {
+                    int mirroredRow = newRows - 1 - r;
+                    
+                    // left
+                    fullMap[mirroredRow, c] = tileVal;
+                    
+                    // right
+                    fullMap[mirroredRow, newCols - 1 - c] = tileVal;
+                }
+            }
+        }
+        PlaceTiles(fullMap);
     }
 }
