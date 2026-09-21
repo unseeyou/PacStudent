@@ -44,7 +44,7 @@ public class LevelGenerator : MonoBehaviour
         
         if (tileID == 2 || tileID == 4)  // straight walls
         {
-            if (top || bottom) return 90f;
+            if (top && bottom) return 90f;
             return 0f;                    
         }
         
