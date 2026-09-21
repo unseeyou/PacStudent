@@ -26,6 +26,7 @@ public class LevelGenerator : MonoBehaviour
     public Tilemap target;
     public TileBase[] tiles;
     public GameObject powerPellet;
+    public GameObject[] currentPowerPellets;
     
     void PlaceTiles(int[,] grid)
     {
@@ -70,12 +71,12 @@ public class LevelGenerator : MonoBehaviour
                             tileToPlace = tiles[7];
                             break;
                         case 6:
-                            tileToPlace = null;
                             int y = rows - 1 - r - Mathf.CeilToInt(rows/2f);
                             int x = c - Mathf.CeilToInt(cols/2f);
                             Vector3Int cellPos = new Vector3Int(x, y, 0);
                             Vector3 worldPos = target.GetCellCenterWorld(cellPos);
-                            Instantiate(powerPellet, worldPos, Quaternion.identity);
+                            GameObject p = Instantiate(powerPellet, worldPos, Quaternion.identity);
+                            p.GetComponent<Renderer>().sortingOrder = 3;
                             break;
                         default:
                             tileToPlace = tiles[6];
@@ -103,7 +104,7 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         target.ClearAllTiles();
-        foreach (GameObject obj in target.gameObject.GetComponents<GameObject>())
+        foreach (GameObject obj in currentPowerPellets)
         {
             obj.SetActive(false); // the apples that are alr there will go poof
         }

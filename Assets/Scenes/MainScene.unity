@@ -7417,6 +7417,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b3ee70e67daaad4ba76fd0e27d45d0c, type: 2}
   - {fileID: 11400000, guid: c5ef6797dd3414b4fa4bb0c75246c8a1, type: 2}
   powerPellet: {fileID: 861574998}
+  currentPowerPellets:
+  - {fileID: 546384527}
+  - {fileID: 603746369}
+  - {fileID: 1356213509}
+  - {fileID: 517058858}
+--- !u!1 &517058858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9174232055674497036, guid: 8ca55c8454476c649a1df832e83c4692, type: 3}
+  m_PrefabInstance: {fileID: 603953113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7645,6 +7655,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &546384527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9174232055674497036, guid: 8ca55c8454476c649a1df832e83c4692, type: 3}
+  m_PrefabInstance: {fileID: 644483381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &603746369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9174232055674497036, guid: 8ca55c8454476c649a1df832e83c4692, type: 3}
+  m_PrefabInstance: {fileID: 181315863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &603953113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16605,6 +16625,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1356213509 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9174232055674497036, guid: 8ca55c8454476c649a1df832e83c4692, type: 3}
+  m_PrefabInstance: {fileID: 676678945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1580648835
 GameObject:
   m_ObjectHideFlags: 0
