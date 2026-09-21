@@ -4,8 +4,11 @@ using NUnit.Framework.Constraints;
 
 public class Tweener : MonoBehaviour
 {
+    private static readonly int X = Animator.StringToHash("X");
+    private static readonly int Y = Animator.StringToHash("Y");
     private List<Tween> activeTweens = new List<Tween>();
     private PacStudentSoundManager sound;
+    [SerializeField] private Animator animator;
 
     void Start()
     {
@@ -33,7 +36,7 @@ public class Tweener : MonoBehaviour
         {
             Tween activeTween = new Tween(targetObject, startPos, endPos, Time.time, duration);
             activeTweens.Add(activeTween);
-            sound.PlayStepSound();
+            
             return true;
         }
         return false;
@@ -47,10 +50,21 @@ public class Tweener : MonoBehaviour
             Tween activeTween = activeTweens[i];
             if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
             {
-                float pastDuration = (Time.time - activeTween.StartTime) / activeTween.Duration; // linear
+                if (activeTween.Target.position == activeTween.StartPos)  // first frame of the new step
+                {
+                    sound.PlayStepSound();
+                }
+                
+                float pastDuration = (Time.time - activeTween.StartTime) / activeTween.Duration;  // linear
                 // float cubicTime = pastDuration * pastDuration * pastDuration;
                 Vector3 pos = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, pastDuration);
                 activeTween.Target.position = pos;
+                
+                float x = activeTween.StartPos.x - activeTween.EndPos.x;
+                float y = activeTween.StartPos.y - activeTween.EndPos.y;
+                
+                animator.SetFloat(X, x);
+                animator.SetFloat(Y, y);
             }
 
             else
