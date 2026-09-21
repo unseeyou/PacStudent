@@ -7357,6 +7357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 508416355}
   - component: {fileID: 508416354}
+  - component: {fileID: 508416356}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -7393,6 +7394,18 @@ Transform:
   - {fileID: 1171261574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &508416356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508416353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a0aae129df9034291eed158b7d76b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
