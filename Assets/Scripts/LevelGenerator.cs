@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class LevelGenerator : MonoBehaviour
@@ -23,10 +24,14 @@ public class LevelGenerator : MonoBehaviour
     };
 
     public Tilemap target;
-    private Tilemap.TileArray _tiles;
+    public TileBase[] tiles;
     
     void PlaceTiles(int[,] grid)
     {
+        foreach (var tile in tiles)
+        {
+            Debug.Log($"LevelGenerator: Using saved tile {tile.name}");
+        }
         int rows = grid.GetLength(0);
         int cols = grid.GetLength(1);
 
@@ -39,9 +44,35 @@ public class LevelGenerator : MonoBehaviour
                 TileBase tileToPlace = null;
 
                 // Check if the tileID is within bounds of your assigned array
-                if (tileID >= 0)
+                if (tileID > 0)
                 {
-                    tileToPlace = _tiles[0];
+                    switch (tileID)
+                    {
+                        case 1:
+                            tileToPlace = tiles[3];
+                            break;
+                        case 2:
+                            tileToPlace = tiles[2];
+                            break;
+                        case 3:
+                            tileToPlace = tiles[0];
+                            break;
+                        case 4:
+                            tileToPlace = tiles[1];
+                            break;
+                        case 7:
+                            tileToPlace = tiles[4];
+                            break;
+                        case 8:
+                            tileToPlace = tiles[5];
+                            break;
+                        case 5:
+                            tileToPlace = tiles[7];
+                            break;
+                        default:
+                            tileToPlace = tiles[6];
+                            break;
+                    }
                 }
 
                 // Invert the Y coordinate (`rows - 1 - r`) so row 0 (top of array) 
@@ -59,7 +90,6 @@ public class LevelGenerator : MonoBehaviour
     
     void Start()
     {
-        _tiles = target.GetUsedTiles();
         target.ClearAllTiles();
 
         int originalRows = levelMap.GetLength(0); // 15
