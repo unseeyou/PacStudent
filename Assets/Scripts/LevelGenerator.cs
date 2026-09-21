@@ -42,18 +42,25 @@ public class LevelGenerator : MonoBehaviour
         bool left = (c > 0) && IsWall(grid[r, c - 1]);
         bool right = (c < cols - 1) && IsWall(grid[r, c + 1]);
         
-        if (tileID == 2 || tileID == 4)
+        if (tileID == 2 || tileID == 4)  // straight walls
         {
             if (top || bottom) return 90f;
             return 0f;                    
         }
         
-        if (tileID == 1 ||  tileID == 3)
+        if (tileID == 1 ||  tileID == 3) // corners
         {
             if (top && right)    return 90f;
             if (right && bottom) return 0f;
             if (bottom && left)  return -90;
             if (left && top)     return 180f;
+        }
+
+        if (tileID == 7)  // t junction thing
+        {
+            if (top && right && left) return 180f;
+            if (bottom && right && top) return 90f;
+            if (left && top && bottom) return -90f;
         }
 
         return 0f;
