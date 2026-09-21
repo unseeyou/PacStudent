@@ -25,6 +25,7 @@ public class LevelGenerator : MonoBehaviour
 
     public Tilemap target;
     public TileBase[] tiles;
+    public GameObject powerPellet;
     
     void PlaceTiles(int[,] grid)
     {
@@ -42,8 +43,7 @@ public class LevelGenerator : MonoBehaviour
                 int tileID = grid[r, c];
 
                 TileBase tileToPlace = null;
-
-                // Check if the tileID is within bounds of your assigned array
+                
                 if (tileID > 0)
                 {
                     switch (tileID)
@@ -69,19 +69,31 @@ public class LevelGenerator : MonoBehaviour
                         case 5:
                             tileToPlace = tiles[7];
                             break;
+                        case 6:
+                            tileToPlace = null;
+                            int y = rows - 1 - r - Mathf.CeilToInt(rows/2f);
+                            int x = c - Mathf.CeilToInt(cols/2f);
+                            Vector3Int cellPos = new Vector3Int(x, y, 0);
+                            Vector3 worldPos = target.GetCellCenterWorld(cellPos);
+                            Instantiate(powerPellet, worldPos, Quaternion.identity);
+                            break;
                         default:
                             tileToPlace = tiles[6];
                             break;
                     }
                 }
 
-                // Invert the Y coordinate (`rows - 1 - r`) so row 0 (top of array) 
-                // gets placed at the top of the tilemap instead of being flipped upside down.
-                int yPos = rows - 1 - r - Mathf.CeilToInt(rows/2f);
-                int xPos = c - Mathf.CeilToInt(cols/2f);
-                Vector3Int pos = new Vector3Int(xPos, yPos, 0);
-
-                target.SetTile(pos, tileToPlace);
+                if (tileToPlace == null)
+                {
+                    // do nothing
+                }
+                else
+                {
+                    int yPos = rows - 1 - r - Mathf.CeilToInt(rows/2f);
+                    int xPos = c - Mathf.CeilToInt(cols/2f);
+                    Vector3Int pos = new Vector3Int(xPos, yPos, 0);
+                    target.SetTile(pos, tileToPlace);
+                }
             }
         }
 
@@ -91,6 +103,10 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         target.ClearAllTiles();
+        foreach (GameObject obj in target.gameObject.GetComponents<GameObject>())
+        {
+            obj.SetActive(false); // the apples that are alr there will go poof
+        }
 
         int originalRows = levelMap.GetLength(0); // 15
         int originalCols = levelMap.GetLength(1); // 14

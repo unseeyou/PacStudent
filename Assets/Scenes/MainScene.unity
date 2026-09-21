@@ -7416,6 +7416,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 36efcb3d7842ce94db5c584784cf3a05, type: 2}
   - {fileID: 11400000, guid: 8b3ee70e67daaad4ba76fd0e27d45d0c, type: 2}
   - {fileID: 11400000, guid: c5ef6797dd3414b4fa4bb0c75246c8a1, type: 2}
+  powerPellet: {fileID: 861574998}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -8002,6 +8003,11 @@ MonoBehaviour:
   moveSoundSource: {fileID: 1701171480}
   moveSoundClip: {fileID: 8300000, guid: c55937c027a2a724b88de9d185a8c699, type: 3}
   eatSoundClip: {fileID: 8300000, guid: e7664a53b95a62a4fb48d5f0d8320591, type: 3}
+--- !u!1 &861574998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9174232055674497036, guid: 8ca55c8454476c649a1df832e83c4692, type: 3}
+  m_PrefabInstance: {fileID: 3094982426184811132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1000346004
 GameObject:
   m_ObjectHideFlags: 0
@@ -17089,7 +17095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9174232055674497036, guid: 8ca55c8454476c649a1df832e83c4692, type: 3}
       propertyPath: m_Name
-      value: powerPellet_0
+      value: powerPellet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
