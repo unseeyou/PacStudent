@@ -27,11 +27,44 @@ public class LevelGenerator : MonoBehaviour
     public GameObject powerPellet;
     public GameObject[] currentPowerPellets;
     
-    bool isWall(int id)
+    bool IsWall(int id)
     {
         return id == 1 || id == 2 || id == 3 || id == 4 || id == 7;
     }
-    
+
+    TileBase GetTileFromID(int tileID)
+    {
+        TileBase tileToPlace = null;
+        if (tileID > 0)
+        {
+            switch (tileID)
+            {
+                case 1:
+                    tileToPlace = tiles[3];
+                    break;
+                case 2:
+                    tileToPlace = tiles[2];
+                    break;
+                case 3:
+                    tileToPlace = tiles[0];
+                    break;
+                case 4:
+                    tileToPlace = tiles[1];
+                    break;
+                case 7:
+                    tileToPlace = tiles[4];
+                    break;
+                case 8:
+                    tileToPlace = tiles[5];
+                    break;
+                case 5:
+                    tileToPlace = tiles[7];
+                    break;
+            }
+        }
+        return tileToPlace;
+    }
+
     void PlaceTiles(int[,] grid)
     {
         foreach (var tile in tiles)
@@ -48,44 +81,18 @@ public class LevelGenerator : MonoBehaviour
                 int tileID = grid[r, c];
 
                 TileBase tileToPlace = null;
-                
-                if (tileID > 0)
+                if (tileID == 6)
                 {
-                    switch (tileID)
-                    {
-                        case 1:
-                            tileToPlace = tiles[3];
-                            break;
-                        case 2:
-                            tileToPlace = tiles[2];
-                            break;
-                        case 3:
-                            tileToPlace = tiles[0];
-                            break;
-                        case 4:
-                            tileToPlace = tiles[1];
-                            break;
-                        case 7:
-                            tileToPlace = tiles[4];
-                            break;
-                        case 8:
-                            tileToPlace = tiles[5];
-                            break;
-                        case 5:
-                            tileToPlace = tiles[7];
-                            break;
-                        case 6:
-                            int y = rows - 1 - r - Mathf.CeilToInt(rows/2f);
-                            int x = c - Mathf.CeilToInt(cols/2f);
-                            Vector3Int cellPos = new Vector3Int(x, y, 0);
-                            Vector3 worldPos = target.GetCellCenterWorld(cellPos);
-                            GameObject p = Instantiate(powerPellet, worldPos, Quaternion.identity);
-                            p.GetComponent<Renderer>().sortingOrder = 3;
-                            break;
-                        default:
-                            tileToPlace = tiles[6];
-                            break;
-                    }
+                    int y = rows - 1 - r - Mathf.CeilToInt(rows/2f);
+                    int x = c - Mathf.CeilToInt(cols/2f);
+                    Vector3Int cellPos = new Vector3Int(x, y, 0);
+                    Vector3 worldPos = target.GetCellCenterWorld(cellPos);
+                    GameObject p = Instantiate(powerPellet, worldPos, Quaternion.identity);
+                    p.GetComponent<Renderer>().sortingOrder = 3;
+                }
+                else
+                {
+                    tileToPlace = GetTileFromID(tileID);
                 }
 
                 if (tileToPlace == null)
