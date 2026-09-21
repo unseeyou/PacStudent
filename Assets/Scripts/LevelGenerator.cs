@@ -21,16 +21,20 @@ public class LevelGenerator : MonoBehaviour
         {2,2,2,2,2,1,5,3,3,0,4,0,0,0},
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
     };
+
+    public Tilemap target;
+    private Tilemap.TileArray _tiles;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-    }
+        _tiles = target.GetUsedTiles();
+        target.ClearAllTiles();
 
-    // Update is called once per frame
-    void Update()
-    {
+        int originalRows = levelMap.GetLength(0); // 15
+        int originalCols = levelMap.GetLength(1); // 14
         
+        int newRows = (originalRows * 2) - 1; // 29
+        int newCols = originalCols * 2;       // 28
     }
 }
