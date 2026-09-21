@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MovePacStudent : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class MovePacStudent : MonoBehaviour
     private Tweener tweener;
     private List<string> _directions;
     private int _index = 0;
+    [FormerlySerializedAs("_animator")] [SerializeField] private Animator animator;
     
     void Start()
     {
@@ -39,15 +40,23 @@ public class MovePacStudent : MonoBehaviour
         {
             case "up":
                 endPos.y += 1f;
+                animator.SetFloat("X", 0f);
+                animator.SetFloat("Y", 1f);
                 break;
             case "down":
                 endPos.y -= 1f;
+                animator.SetFloat("X", 0f);
+                animator.SetFloat("Y", -1f);
                 break;
             case "left":
                 endPos.x -= 1f;
+                animator.SetFloat("X", -1f);
+                animator.SetFloat("Y", 0f);
                 break;
             case "right":
                 endPos.x += 1f;
+                animator.SetFloat("X", 1f);
+                animator.SetFloat("Y", 0f);
                 break;
         }
         return endPos;

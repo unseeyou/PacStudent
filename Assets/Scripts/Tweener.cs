@@ -1,9 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 
 public class Tweener : MonoBehaviour
 {
     private List<Tween> activeTweens = new List<Tween>();
+    private PacStudentSoundManager sound;
+
+    void Start()
+    {
+        sound = GetComponent<PacStudentSoundManager>();
+    }
 
     public bool TweenExists(Transform target)
     {
@@ -26,6 +33,7 @@ public class Tweener : MonoBehaviour
         {
             Tween activeTween = new Tween(targetObject, startPos, endPos, Time.time, duration);
             activeTweens.Add(activeTween);
+            sound.PlayStepSound();
             return true;
         }
         return false;
