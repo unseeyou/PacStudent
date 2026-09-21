@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class LevelGenerator : MonoBehaviour
@@ -27,6 +26,11 @@ public class LevelGenerator : MonoBehaviour
     public TileBase[] tiles;
     public GameObject powerPellet;
     public GameObject[] currentPowerPellets;
+    
+    bool isWall(int id)
+    {
+        return id == 1 || id == 2 || id == 3 || id == 4 || id == 7;
+    }
     
     void PlaceTiles(int[,] grid)
     {
