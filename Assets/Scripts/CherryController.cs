@@ -1,11 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CherryController : MonoBehaviour
 {
     public float gridSize = 1f;  
-    public float moveTime = 1f;
-    public Vector2 mapCentre = Vector2.zero + new Vector2(0f, -1f);
-    public Vector2 mapSize = new Vector2(28f, 30f);
+    private float moveTime = 5f;
+    private Vector2 mapSize = new(28f, 30f);
     
     public Tweener tweener;
     public Transform cherryParent;
@@ -13,8 +13,8 @@ public class CherryController : MonoBehaviour
 
     Vector3 GetRandomGridOutsideBox()
     {
-        // 0: Left, 1: Right, 2: Bottom, 3: Top: 4
-        int side = Random.Range(0, 4);
+        // 0: Left, 1: Right
+        int side = Random.Range(0, 1);
     
         int rx = 0;
         int ry = 0;
@@ -29,19 +29,11 @@ public class CherryController : MonoBehaviour
         {
             case 0:
                 rx = Random.Range(boxLeftGrid - 3, boxLeftGrid);
-                ry = Random.Range(boxBottomGrid - 2, boxTopGrid + 3);
+                ry = Random.Range(boxBottomGrid + 2, boxTopGrid - 3);
                 break;
             case 1: 
                 rx = Random.Range(boxRightGrid + 1, boxRightGrid + 4);
-                ry = Random.Range(boxBottomGrid - 2, boxTopGrid + 3);
-                break;
-            case 2: 
-                rx = Random.Range(boxLeftGrid, boxRightGrid + 1);
-                ry = Random.Range(boxBottomGrid - 3, boxBottomGrid);
-                break;
-            case 3: 
-                rx = Random.Range(boxLeftGrid, boxRightGrid + 1);
-                ry = Random.Range(boxTopGrid + 1, boxTopGrid + 4);
+                ry = Random.Range(boxBottomGrid + 2, boxTopGrid - 3);
                 break;
         }
 
@@ -53,12 +45,33 @@ public class CherryController : MonoBehaviour
     {
         cherry = Instantiate(cherryParent, GetRandomGridOutsideBox(), Quaternion.identity);
         cherry.gameObject.SetActive(true);
-        tweener.AddTween(cherry, cherry.position, GetRandomGridOutsideBox(), moveTime);
+
+        Vector3 endPos = new Vector3();
+        endPos.y = cherry.position.y;
+        if (cherry.position.x < 0)
+        {
+            endPos.x = mapSize.x / 2 + 1;
+        }
+        else
+        {
+            endPos.x = -1 * (mapSize.x / 2 + 1);
+        }
+        
+        tweener.AddTween(cherry, cherry.position, endPos, moveTime);
+        cherry.tag = "cherry_moved";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (cherry != null)
+        {
+            if (!tweener.TweenExists(cherry) && cherry.CompareTag("cherry_moved"))
+            {
+                cherry.gameObject.SetActive(false);
+                Destroy(cherry.gameObject);
+                cherry = null;
+            }
+        }
     }
 }
