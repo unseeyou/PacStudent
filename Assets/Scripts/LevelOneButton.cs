@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelOne : MonoBehaviour
+public class LevelOneButton : MonoBehaviour
 {
     [SerializeField] private Button levelOneButton;
     public int levelSceneIndex;
