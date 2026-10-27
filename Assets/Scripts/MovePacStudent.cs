@@ -6,12 +6,18 @@ public class MovePacStudent : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Transform target;
+    [SerializeField] 
     private Tweener tweener;
-    private KeyCode lastInput = KeyCode.End;
+
+    private KeyCode placeholder = KeyCode.End;
+    private KeyCode lastInput;
+    private KeyCode currentInput;
     
     void Start()
     {
         tweener = GetComponent<Tweener>();
+        lastInput = placeholder;
+        currentInput = placeholder;
     }
 
     Vector3 GenerateNextMovement(KeyCode key)
@@ -30,6 +36,8 @@ public class MovePacStudent : MonoBehaviour
                 break;
             case KeyCode.D:
                 endPos.x += 1f;
+                break;
+            case KeyCode.End:  // idk how to make it work as const and im too tired :(
                 break;
         }
         return endPos;
@@ -59,7 +67,20 @@ public class MovePacStudent : MonoBehaviour
 
         if (!tweener.TweenExists(target))
         {
-            tweener.AddTween(target, target.position, GenerateNextMovement(lastInput), 0.37f);
+            bool walkable = true; // set this flag with a check in the next section
+            if (walkable)
+            { 
+                tweener.AddTween(target, target.position, GenerateNextMovement(lastInput), 0.2f);  // im pretty sure this is 5 tiles per second
+                currentInput = lastInput;
+            }
+            else
+            {
+                walkable = true; // this would be the second check for the current direction
+                if (walkable)
+                {
+                    tweener.AddTween(target, target.position, GenerateNextMovement(currentInput), 0.2f);
+                }
+            }
         }
     }
 }

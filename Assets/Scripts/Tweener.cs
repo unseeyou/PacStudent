@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class Tweener : MonoBehaviour
 {
@@ -43,6 +44,14 @@ public class Tweener : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (animator.GetFloat(X) == 0 && animator.GetFloat(Y) == 0)
+        {
+            animator.enabled = false;
+        }
+        else
+        {
+            animator.enabled = true;
+        }
         for (int i = activeTweens.Count - 1; i >= 0; i--)
         {
             Tween activeTween = activeTweens[i];
