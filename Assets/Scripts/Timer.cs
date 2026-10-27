@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
     private float _timeMilliseconds;
     private int _timeMinutes;
     private int _timeSeconds;
-    private int GhostTimer;
+    // private int GhostTimer;
     
     void Start()
     {
@@ -16,7 +16,6 @@ public class Timer : MonoBehaviour
         _timeMilliseconds = 0;
         _timeMinutes = 0;
         _timeSeconds = 0;
-        GhostTimer = 0;
     }
 
     // Update is called once per frame
