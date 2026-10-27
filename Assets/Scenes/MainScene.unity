@@ -7596,6 +7596,7 @@ GameObject:
   - component: {fileID: 508416355}
   - component: {fileID: 508416354}
   - component: {fileID: 508416356}
+  - component: {fileID: 508416357}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -7660,6 +7661,24 @@ MonoBehaviour:
   - {fileID: 603746369}
   - {fileID: 1356213509}
   - {fileID: 517058858}
+--- !u!114 &508416357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508416353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcb0864f9810cb4f9453229178c3fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CherryController
+  gridSize: 1
+  moveTime: 1
+  mapCentre: {x: 0, y: 0}
+  mapSize: {x: 0, y: 0}
+  tweener: {fileID: 849708290}
+  cherryParent: {fileID: 1653921911}
 --- !u!1 &517058858 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9174232055674497036, guid: 8ca55c8454476c649a1df832e83c4692, type: 3}
@@ -23174,12 +23193,12 @@ GameObject:
   - component: {fileID: 1653921911}
   - component: {fileID: 1653921910}
   m_Layer: 0
-  m_Name: bonusPellet_0
+  m_Name: bonusPellet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1653921910
 SpriteRenderer:
   serializedVersion: 2
@@ -23248,7 +23267,7 @@ Transform:
   m_GameObject: {fileID: 1653921909}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.21, y: -0.54, z: 15}
+  m_LocalPosition: {x: -16.54, y: -2.1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
