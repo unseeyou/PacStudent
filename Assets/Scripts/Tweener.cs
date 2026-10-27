@@ -61,7 +61,15 @@ public class Tweener : MonoBehaviour
                 {
                     if (activeTween.Target.CompareTag("Player"))
                     {
-                        sound.PlayStepSound();
+                        bool targetIsEdible = true;  // check if the target is a pellet
+                        if (targetIsEdible)
+                        {
+                            sound.PlayEatSound();
+                        }
+                        else
+                        {
+                            sound.PlayStepSound();
+                        }
                     }
                 }
                 
