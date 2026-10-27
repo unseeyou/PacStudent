@@ -7,6 +7,9 @@ TagManager:
   - hiscore
   - time1
   - time2
+  - lifecounter
+  - scoreCounter
+  - timer
   layers:
   - Default
   - TransparentFX
