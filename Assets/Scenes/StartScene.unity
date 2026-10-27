@@ -182,8 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9122d8594050a649b4fa630df2cea8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartSceneSoundManager
-  source: {fileID: 545190509}
-  buttonClickSoundClip: {fileID: 8300000, guid: d0f9d6a547e8537449a34e5a89cbcafa, type: 3}
 --- !u!1 &290549088
 GameObject:
   m_ObjectHideFlags: 0
