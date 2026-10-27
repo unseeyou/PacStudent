@@ -6,7 +6,7 @@ public class PacStudentSoundManager : MonoBehaviour
     public AudioSource moveSoundSource;
     public AudioClip moveSoundClip;
     public AudioClip eatSoundClip;
-    
+
     public void PlayStepSound()
     {
         moveSoundSource.PlayOneShot(moveSoundClip);
