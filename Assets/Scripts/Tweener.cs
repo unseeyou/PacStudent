@@ -36,7 +36,6 @@ public class Tweener : MonoBehaviour
         {
             Tween activeTween = new Tween(targetObject, startPos, endPos, Time.time, duration);
             activeTweens.Add(activeTween);
-            
             return true;
         }
         return false;
@@ -52,7 +51,10 @@ public class Tweener : MonoBehaviour
             {
                 if (activeTween.Target.position == activeTween.StartPos)  // first frame of the new step
                 {
-                    sound.PlayStepSound();
+                    if (activeTween.Target.CompareTag("Player"))
+                    {
+                        sound.PlayStepSound();
+                    }
                 }
                 
                 float pastDuration = (Time.time - activeTween.StartTime) / activeTween.Duration;  // linear
