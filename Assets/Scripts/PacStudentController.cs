@@ -1,13 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using System.Collections.Generic;
 
 public class PacStudentController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Transform target;
-    [SerializeField] 
-    private Tweener tweener;
+    [SerializeField] private Tweener tweener;
+    [SerializeField] private CollisionManager collisionManager;
+
+    private Dictionary<KeyCode, Vector2> directions = new Dictionary<KeyCode, Vector2>()
+    {
+        { KeyCode.A, new Vector2(-1, 0) },
+        { KeyCode.D, new Vector2(1, 0) },
+        { KeyCode.W, new Vector2(0, 1) },
+        { KeyCode.S, new Vector2(0, -1) },
+        { KeyCode.End, Vector2.zero },
+    };
 
     private KeyCode placeholder = KeyCode.End;
     private KeyCode lastInput;
@@ -67,7 +75,16 @@ public class PacStudentController : MonoBehaviour
 
         if (!tweener.TweenExists(target))
         {
-            bool walkable = true; // set this flag with a check in the next section
+            bool walkable = false; // set this flag with a check in the next section
+            TileType tile = collisionManager.CheckTile(directions[lastInput]);
+            if (tile != TileType.Wall)
+            {
+                walkable = true;
+            }
+            
+            Debug.Log(tile);
+            Debug.Log(walkable);
+            
             if (walkable)
             { 
                 tweener.AddTween(target, target.position, GenerateNextMovement(lastInput), 0.2f);  // im pretty sure this is 5 tiles per second
@@ -75,7 +92,12 @@ public class PacStudentController : MonoBehaviour
             }
             else
             {
-                walkable = true; // this would be the second check for the current direction
+                walkable = false; // this would be the second check for the current direction
+                tile = collisionManager.CheckTile(directions[currentInput]);
+                if (tile != TileType.Wall)
+                {
+                    walkable = true;
+                }
                 if (walkable)
                 {
                     tweener.AddTween(target, target.position, GenerateNextMovement(currentInput), 0.2f);
