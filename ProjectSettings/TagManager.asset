@@ -12,6 +12,7 @@ TagManager:
   - timer
   - cherry_moved
   - powerPellet
+  - teleporter
   layers:
   - Default
   - TransparentFX

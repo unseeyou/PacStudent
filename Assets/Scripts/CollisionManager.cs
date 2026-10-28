@@ -1,5 +1,7 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Debug = UnityEngine.Debug;
 
 public enum TileType
 {
@@ -45,6 +47,15 @@ public class CollisionManager : MonoBehaviour
             soundManager.PlayCherrySound();
             hudManager.UpdateScore(100);
         }
+        
+        else if (other.CompareTag("teleporter"))
+        {
+            Debug.Log(other.name);
+            if (transform.position.x < 0)
+            {
+                
+            }
+        }
     }
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -56,7 +67,6 @@ public class CollisionManager : MonoBehaviour
 
             if (tile != null)
             {
-                Debug.Log($"Collided with tile: {tile.name}");
                 if (tile.name == "pellet")
                 {
                     hudManager.UpdateScore(10);
