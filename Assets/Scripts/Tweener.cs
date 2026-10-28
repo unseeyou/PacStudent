@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 
 public class Tweener : MonoBehaviour
@@ -60,6 +61,12 @@ public class Tweener : MonoBehaviour
         for (int i = activeTweens.Count - 1; i >= 0; i--)
         {
             Tween activeTween = activeTweens[i];
+            if (activeTween.Target.IsDestroyed())
+            {
+                activeTweens.RemoveAt(i);
+                continue;
+            }
+            
             if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
             {
                 if (activeTween.Target.position == activeTween.StartPos)  // first frame of the new step

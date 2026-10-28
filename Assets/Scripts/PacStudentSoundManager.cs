@@ -15,6 +15,8 @@ public class PacStudentSoundManager : MonoBehaviour
     public AudioClip levelStartClip;
     public AudioClip backgroundClipNormal;
     public AudioClip backgroundClipScared;
+    public AudioClip cherrySoundClip;
+    
     private GhostState ghostState = GhostState.Normal;
 
     private void Start()
@@ -52,5 +54,10 @@ public class PacStudentSoundManager : MonoBehaviour
     public void PlayEatSound()
     {
         moveSoundSource.PlayOneShot(eatSoundClip);
+    }
+
+    public void PlayCherrySound()
+    {
+        moveSoundSource.PlayOneShot(cherrySoundClip);
     }
 }

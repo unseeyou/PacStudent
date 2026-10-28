@@ -13,6 +13,7 @@ public class CollisionManager : MonoBehaviour
 {
     [SerializeField] private Tilemap targetTilemap;
     [SerializeField] private Grid grid;   
+    public HUDManager hudManager;
     public PacStudentSoundManager soundManager;
     public TileType CheckTile(Vector2 facingDirection)
     {
@@ -48,6 +49,13 @@ public class CollisionManager : MonoBehaviour
         {
             Destroy(other.gameObject);
             soundManager.setGhostState(GhostState.Scared);
+        }
+        
+        else if (other.CompareTag("cherry_moved"))
+        {
+            Destroy(other.gameObject);
+            soundManager.PlayCherrySound();
+            hudManager.UpdateScore(100);
         }
     }
     

@@ -69,7 +69,7 @@ public class CherryController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cherry != null)
+        if (cherry != null && !cherry.IsDestroyed())
         {
             if (!tweener.TweenExists(cherry) && cherry.CompareTag("cherry_moved"))
             {
