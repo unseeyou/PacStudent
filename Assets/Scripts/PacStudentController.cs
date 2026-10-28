@@ -106,6 +106,7 @@ public class PacStudentController : MonoBehaviour
                 else
                 {
                     target.position = backTrack.position;
+                    collisionManager.soundManager.PlayWallBumpSound();
                 }
             }
         }

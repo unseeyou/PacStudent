@@ -13,18 +13,21 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] private Grid grid;   
     public HUDManager hudManager;
     public PacStudentSoundManager soundManager;
-
-    private bool _onWall = false;    
+    
     public TileType CheckTile()
     {
-        if (_onWall)
+        if (targetTilemap != null)
         {
-            return TileType.Wall;
+            Vector3Int cellPos = targetTilemap.WorldToCell(transform.position);
+            TileBase tile = targetTilemap.GetTile(cellPos);
+
+            if (tile != null && tile.name.Contains("Wall"))
+            {
+                return TileType.Wall;
+            }
         }
-        else
-        {
-            return TileType.Empty;
-        }
+        
+        return TileType.Empty;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -53,36 +56,12 @@ public class CollisionManager : MonoBehaviour
 
             if (tile != null)
             {
-                _onWall = false;
                 Debug.Log($"Collided with tile: {tile.name}");
                 if (tile.name == "pellet")
                 {
                     hudManager.UpdateScore(10);
                     tilemap.SetTile(cellPos, null);
                 }
-                else if (tile.name.Contains("Wall"))
-                {
-                    _onWall = true;
-                    // go back to previous tile
-                }
-            }
-        }
-    }
-    
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Tilemap tilemap = other.gameObject.GetComponent<Tilemap>();
-        if (tilemap != null)
-        {
-            Vector3Int cellPos = tilemap.WorldToCell(transform.position);
-            TileBase tile = tilemap.GetTile(cellPos);
-
-            if (tile != null)
-            {
-               if (tile.name.Contains("Wall")) 
-               {
-                    _onWall = false;
-               }
             }
         }
     }

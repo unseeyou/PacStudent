@@ -9035,6 +9035,7 @@ MonoBehaviour:
   backgroundClipNormal: {fileID: 8300000, guid: 0973d8b4375b4534ab429c3eb4314f6d, type: 3}
   backgroundClipScared: {fileID: 8300000, guid: fa6a6f91f0e7a594cab05d12d9518d55, type: 3}
   cherrySoundClip: {fileID: 8300000, guid: 7b027dd8549f43b459f29429fcc30da6, type: 3}
+  WallBumpAudioClip: {fileID: 8300000, guid: eb5cedb5f72349b428c514177b955b6e, type: 3}
 --- !u!1 &978427934
 GameObject:
   m_ObjectHideFlags: 0

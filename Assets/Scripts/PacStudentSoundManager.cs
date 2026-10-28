@@ -16,8 +16,10 @@ public class PacStudentSoundManager : MonoBehaviour
     public AudioClip backgroundClipNormal;
     public AudioClip backgroundClipScared;
     public AudioClip cherrySoundClip;
+    public AudioClip WallBumpAudioClip;
     
     private GhostState ghostState = GhostState.Normal;
+    private float scareStartTime;
 
     private void Start()
     {
@@ -41,6 +43,7 @@ public class PacStudentSoundManager : MonoBehaviour
         else if (state == GhostState.Scared)
         {
             moveSoundSource.clip = backgroundClipScared;
+            scareStartTime = Time.time;
         }
         ghostState = state;
         moveSoundSource.Play();
@@ -59,5 +62,18 @@ public class PacStudentSoundManager : MonoBehaviour
     public void PlayCherrySound()
     {
         moveSoundSource.PlayOneShot(cherrySoundClip);
+    }
+
+    public void PlayWallBumpSound()
+    {
+        moveSoundSource.PlayOneShot(WallBumpAudioClip);
+    }
+
+    private void Update()
+    {
+        if (scareStartTime + 10 > Time.time)
+        {
+            setGhostState(GhostState.Normal);
+        }
     }
 }
