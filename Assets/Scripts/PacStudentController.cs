@@ -8,7 +8,8 @@ public class PacStudentController : MonoBehaviour
     [SerializeField] private Tweener tweener;
     [SerializeField] private CollisionManager collisionManager;
     public Transform backTrack;
-
+    public GameObject countdown;
+    
     private Dictionary<KeyCode, Vector2> directions = new Dictionary<KeyCode, Vector2>()
     {
         { KeyCode.A, new Vector2(-1, 0) },
@@ -56,6 +57,11 @@ public class PacStudentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (countdown.activeSelf)
+        {
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.W))
         {
             lastInput = KeyCode.W;
