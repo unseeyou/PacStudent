@@ -5,6 +5,7 @@ public class Timer : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public TextMeshProUGUI timerText;
+    public GameObject countdown;
     private float _timeMilliseconds;
     private int _timeMinutes;
     private int _timeSeconds;
@@ -21,6 +22,10 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (countdown.activeSelf)
+        {
+            return;
+        }
         timerText.SetText($"{_timeMinutes:D2}:{_timeSeconds:D2}:{_timeMilliseconds.ToString("00").Replace(".", "").Substring(0, 2)}");
         _timeMilliseconds += Time.deltaTime * 1000f;
         if (_timeMilliseconds >= 1000)

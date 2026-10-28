@@ -23651,6 +23651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   timerText: {fileID: 1842512448}
+  countdown: {fileID: 235474221}
 --- !u!114 &1372114909
 MonoBehaviour:
   m_ObjectHideFlags: 0
