@@ -71,7 +71,7 @@ public class PacStudentSoundManager : MonoBehaviour
 
     private void Update()
     {
-        if (scareStartTime + 10 > Time.time)
+        if (Time.time - scareStartTime > 10f)
         {
             setGhostState(GhostState.Normal);
         }
