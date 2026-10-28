@@ -19,7 +19,8 @@ public class PacStudentSoundManager : MonoBehaviour
     public AudioClip WallBumpAudioClip;
     
     private GhostState ghostState = GhostState.Normal;
-    private float scareStartTime;
+    private float scareStartTime = -1f;
+    private float start;
 
     private void Start()
     {
@@ -46,7 +47,6 @@ public class PacStudentSoundManager : MonoBehaviour
             scareStartTime = Time.time;
         }
         ghostState = state;
-        moveSoundSource.Play();
     }
 
     public void PlayStepSound()
