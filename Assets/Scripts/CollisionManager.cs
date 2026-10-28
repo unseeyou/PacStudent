@@ -7,6 +7,7 @@ public enum TileType
 {
     Empty = 0,
     Wall = 1,
+    Pellet = 2
 }
 
 public class CollisionManager : MonoBehaviour
@@ -26,6 +27,11 @@ public class CollisionManager : MonoBehaviour
             if (tile != null && tile.name.Contains("Wall"))
             {
                 return TileType.Wall;
+            }
+            
+            else if (tile != null && tile.name.Contains("pellet"))
+            {
+                return TileType.Pellet;
             }
         }
         
@@ -71,6 +77,7 @@ public class CollisionManager : MonoBehaviour
                 {
                     hudManager.UpdateScore(10);
                     tilemap.SetTile(cellPos, null);
+                    soundManager.PlayEatSound();
                 }
             }
         }
