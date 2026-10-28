@@ -63,7 +63,7 @@ public class CherryController : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating(nameof(SpawnCherry), 5f, 5f);
+        InvokeRepeating(nameof(SpawnCherry), 5f, 10f);
     }
 
     // Update is called once per frame
