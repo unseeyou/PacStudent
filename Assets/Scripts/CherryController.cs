@@ -14,7 +14,7 @@ public class CherryController : MonoBehaviour
     Vector3 GetRandomGridOutsideBox()
     {
         // 0: Left, 1: Right
-        int side = Random.Range(0, 1);
+        int side = Random.Range(0, 2);
     
         int rx = 0;
         int ry = 0;
@@ -41,7 +41,7 @@ public class CherryController : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void SpawnCherry()
     {
         cherry = Instantiate(cherryParent, GetRandomGridOutsideBox(), Quaternion.identity);
         cherry.gameObject.SetActive(true);
@@ -59,6 +59,11 @@ public class CherryController : MonoBehaviour
         
         tweener.AddTween(cherry, cherry.position, endPos, moveTime);
         cherry.tag = "cherry_moved";
+    }
+
+    void Start()
+    {
+        InvokeRepeating(nameof(SpawnCherry), 5f, 5f);
     }
 
     // Update is called once per frame
