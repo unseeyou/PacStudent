@@ -76,7 +76,7 @@ public class PacStudentController : MonoBehaviour
         if (!tweener.TweenExists(target))
         {
             bool walkable = false; // set this flag with a check in the next section
-            TileType tile = collisionManager.CheckTile(directions[lastInput]);
+            TileType tile = collisionManager.CheckTile();
             if (tile != TileType.Wall)
             {
                 walkable = true;
@@ -90,7 +90,7 @@ public class PacStudentController : MonoBehaviour
             else
             {
                 walkable = false; // this would be the second check for the current direction
-                tile = collisionManager.CheckTile(directions[currentInput]);
+                tile = collisionManager.CheckTile();
                 if (tile != TileType.Wall)
                 {
                     walkable = true;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,36 +16,14 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] private Grid grid;   
     public HUDManager hudManager;
     public PacStudentSoundManager soundManager;
-    public TileType CheckTile(Vector2 facingDirection)
+    
+    public TileType CheckTile()
     {
-        if (targetTilemap == null || grid == null)
-        {
-            Debug.LogWarning("Tilemap or Grid reference missing on TileDetector script.");
-            return TileType.Empty;
-        }
-        
-        // Vector3 playerPos = transform.position;
-        // Vector3Int cellPosition = grid.WorldToCell(playerPos);
-        // TileBase tile = targetTilemap.GetTile(cellPosition);
-        //
-        // if (tile != null)
-        // {
-        //     if (tile.name == "pellet")
-        //     {
-        //         return TileType.Pellet;
-        //     }
-        //     Debug.Log($"Facing tile: {tile.name} at cell position: {cellPosition}");
-        //     
-        //     return TileType.Wall;
-        // }
-        //
-        // Debug.Log($"Facing an empty tile space at cell position: {cellPosition}");
-        return TileType.Empty;
+        return TileType.Empty;  // stub for now
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name);
         if (other.CompareTag("powerPellet"))
         {
             Destroy(other.gameObject);
@@ -58,5 +37,23 @@ public class CollisionManager : MonoBehaviour
             hudManager.UpdateScore(100);
         }
     }
-    
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        Tilemap tilemap = other.gameObject.GetComponent<Tilemap>();
+        if (tilemap != null)
+        {
+            Vector3Int cellPos = tilemap.WorldToCell(transform.position);
+            TileBase tile = tilemap.GetTile(cellPos);
+
+            if (tile != null)
+            {
+                Debug.Log($"Collided with tile: {tile.name} of type {tile.GetType()}");
+                if (tile.name == "pellet")
+                {
+                    hudManager.UpdateScore(10);
+                    tilemap.SetTile(cellPos, null);
+                }
+            }
+        }
+    }
 }
