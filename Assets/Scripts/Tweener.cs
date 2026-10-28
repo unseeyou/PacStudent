@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 
 public class Tweener : MonoBehaviour
 {

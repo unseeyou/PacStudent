@@ -7,6 +7,7 @@ public class PacStudentController : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Tweener tweener;
     [SerializeField] private CollisionManager collisionManager;
+    public Transform backTrack;
 
     private Dictionary<KeyCode, Vector2> directions = new Dictionary<KeyCode, Vector2>()
     {
@@ -26,6 +27,7 @@ public class PacStudentController : MonoBehaviour
         tweener = GetComponent<Tweener>();
         lastInput = placeholder;
         currentInput = placeholder;
+        backTrack.position = transform.position;
     }
 
     Vector3 GenerateNextMovement(KeyCode key)
@@ -80,6 +82,7 @@ public class PacStudentController : MonoBehaviour
             if (tile != TileType.Wall)
             {
                 walkable = true;
+                backTrack.position = target.position;
             }
             
             if (walkable)
@@ -89,15 +92,20 @@ public class PacStudentController : MonoBehaviour
             }
             else
             {
-                walkable = false; // this would be the second check for the current direction
                 tile = collisionManager.CheckTile();
                 if (tile != TileType.Wall)
                 {
                     walkable = true;
+                    backTrack.position = target.position;
+                    
                 }
                 if (walkable)
                 {
                     tweener.AddTween(target, target.position, GenerateNextMovement(currentInput), 0.2f);
+                }
+                else
+                {
+                    target.position = backTrack.position;
                 }
             }
         }
