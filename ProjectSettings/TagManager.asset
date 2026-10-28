@@ -11,6 +11,7 @@ TagManager:
   - scoreCounter
   - timer
   - cherry_moved
+  - powerPellet
   layers:
   - Default
   - TransparentFX

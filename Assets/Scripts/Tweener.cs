@@ -36,6 +36,11 @@ public class Tweener : MonoBehaviour
         {
             Tween activeTween = new Tween(targetObject, startPos, endPos, Time.time, duration);
             activeTweens.Add(activeTween);
+            float x = activeTween.EndPos.x - activeTween.StartPos.x;
+            float y = activeTween.EndPos.y -  activeTween.StartPos.y;
+                
+            animator.SetFloat(X, x);
+            animator.SetFloat(Y, y);
             return true;
         }
         return false;
@@ -77,12 +82,6 @@ public class Tweener : MonoBehaviour
                 // float cubicTime = pastDuration * pastDuration * pastDuration;
                 Vector3 pos = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, pastDuration);
                 activeTween.Target.position = pos;
-                
-                float x = activeTween.EndPos.x - activeTween.StartPos.x;
-                float y = activeTween.EndPos.y -  activeTween.StartPos.y;
-                
-                animator.SetFloat(X, x);
-                animator.SetFloat(Y, y);
             }
 
             else

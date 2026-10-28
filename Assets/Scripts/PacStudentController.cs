@@ -82,9 +82,6 @@ public class PacStudentController : MonoBehaviour
                 walkable = true;
             }
             
-            Debug.Log(tile);
-            Debug.Log(walkable);
-            
             if (walkable)
             { 
                 tweener.AddTween(target, target.position, GenerateNextMovement(lastInput), 0.2f);  // im pretty sure this is 5 tiles per second

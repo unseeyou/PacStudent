@@ -13,7 +13,7 @@ public class CollisionManager : MonoBehaviour
 {
     [SerializeField] private Tilemap targetTilemap;
     [SerializeField] private Grid grid;   
-    
+    public PacStudentSoundManager soundManager;
     public TileType CheckTile(Vector2 facingDirection)
     {
         if (targetTilemap == null || grid == null)
@@ -22,23 +22,33 @@ public class CollisionManager : MonoBehaviour
             return TileType.Empty;
         }
         
-        Vector3 playerPos = transform.position;
-        Vector3 checkWorldPosition = playerPos + new Vector3(facingDirection.x, facingDirection.y, 0);
-        Vector3Int cellPosition = grid.WorldToCell(checkWorldPosition);
-        TileBase tile = targetTilemap.GetTile(cellPosition);
-
-        if (tile != null)
-        {
-            if (tile.name == "pellet")
-            {
-                return TileType.Pellet;
-            }
-            Debug.Log($"Facing tile: {tile.name} at cell position: {cellPosition}");
-            
-            return TileType.Wall;
-        }
-
-        Debug.Log($"Facing an empty tile space at cell position: {cellPosition}");
+        // Vector3 playerPos = transform.position;
+        // Vector3Int cellPosition = grid.WorldToCell(playerPos);
+        // TileBase tile = targetTilemap.GetTile(cellPosition);
+        //
+        // if (tile != null)
+        // {
+        //     if (tile.name == "pellet")
+        //     {
+        //         return TileType.Pellet;
+        //     }
+        //     Debug.Log($"Facing tile: {tile.name} at cell position: {cellPosition}");
+        //     
+        //     return TileType.Wall;
+        // }
+        //
+        // Debug.Log($"Facing an empty tile space at cell position: {cellPosition}");
         return TileType.Empty;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other.name);
+        if (other.CompareTag("powerPellet"))
+        {
+            Destroy(other.gameObject);
+            soundManager.setGhostState(GhostState.Scared);
+        }
+    }
+    
 }
